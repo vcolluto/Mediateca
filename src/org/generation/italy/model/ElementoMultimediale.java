@@ -32,11 +32,34 @@ public abstract class ElementoMultimediale {
 	
 	public void restituisciPrestito(int idPrestito) {
 		for(Prestito prestito:elencoPrestiti)		//per ogni prestito
-			if (prestito.getId()==idPrestito)		//se trovo il prestito con quell'id 
+			if (prestito.getId()==idPrestito 
+				&& prestito.getDataFine()!=null)		//se trovo il prestito con quell'id 
 			{
 				prestito.setDataFine(LocalDate.now());	//imposto la data fine alla data attuale
 				nrCopie++;
 			}
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public String getGenere() {
+		return genere;
+	}
+
+	public int getNrCopie() {
+		return nrCopie;
+	}
+	
+	public Iterable<Prestito> getElencoPrestiti() {
+		return elencoPrestiti;
+	}
+	
+	public abstract String dettagli();
 	
 }

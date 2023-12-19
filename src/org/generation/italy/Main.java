@@ -1,22 +1,46 @@
 package org.generation.italy;
 
+import org.generation.italy.model.Libro;
 import org.generation.italy.model.Prestito;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Prestito p1=new Prestito("Enzo");
 		
-		System.out.println("id="+p1.getId()+ "   datainizio="+p1.getDataInizio());
-
+		Libro l=
+			new Libro(
+				"Il signore degli anelli - la compagnia dell'anello",
+				"Fantasy",
+				2,"Tolkien","Secoli dopo la sconfitta di Sauron, una compagnia di coraggiosi ...");
 		
-		Prestito p2=new Prestito("Gino");
+		if (l.effettuaPrestito("Pino")>0)
+			System.out.println("Prestito effettuato");
+		else
+			System.out.println("Prestito non effettuato");
+		if (l.effettuaPrestito("Enzo")>0)
+			System.out.println("Prestito effettuato");
+		else
+			System.out.println("Prestito non effettuato");
+		if (l.effettuaPrestito("Gino")>0)
+			System.out.println("Prestito effettuato");
+		else
+			System.out.println("Prestito non effettuato");
 		
-		System.out.println("id="+p2.getId()+ "   datainizio="+p2.getDataInizio());
-
-Prestito p3=new Prestito("Pino");
+		l.restituisciPrestito(2);
 		
-		System.out.println("id="+p3.getId()+ "   datainizio="+p3.getDataInizio());
+		Libro l1=
+			new Libro(
+				"L'ombra dello scorpione",
+				"Fantasy",
+				5,"S.King","Una misteriosa epidemia stermina gran parte della popolazione ...");
+		
+		System.out.println(l.dettagli());
+		
+		
+		for(Prestito p: l.getElencoPrestiti())
+			System.out.println("Prestito: "+p.getId()+" - utente:"+p.getUtente()+
+					" datainizio:"+p.getDataInizio()+" datafine:"+p.getDataFine());
+		System.out.println(l1.dettagli());
 	}
 
 }
