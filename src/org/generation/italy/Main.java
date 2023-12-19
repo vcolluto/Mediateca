@@ -27,6 +27,12 @@ public class Main {
 			System.out.println("Prestito non effettuato");
 		
 		l.restituisciPrestito(2);
+		l.restituisciPrestito(2);
+		l.restituisciPrestito(2);
+		l.restituisciPrestito(2);
+		l.restituisciPrestito(2);
+		l.restituisciPrestito(2);
+		l.restituisciPrestito(2);
 		
 		Libro l1=
 			new Libro(

@@ -33,7 +33,7 @@ public abstract class ElementoMultimediale {
 	public void restituisciPrestito(int idPrestito) {
 		for(Prestito prestito:elencoPrestiti)		//per ogni prestito
 			if (prestito.getId()==idPrestito 
-				&& prestito.getDataFine()!=null)		//se trovo il prestito con quell'id 
+				&& prestito.getDataFine()==null)		//se trovo il prestito con quell'id 
 			{
 				prestito.setDataFine(LocalDate.now());	//imposto la data fine alla data attuale
 				nrCopie++;
