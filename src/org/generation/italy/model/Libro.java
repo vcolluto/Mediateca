@@ -1,7 +1,7 @@
 package org.generation.italy.model;
 
 public class Libro extends ElementoMultimediale {
-	private String autore, sinossi;
+	protected String autore, sinossi;
 
 	public Libro(String titolo, String genere, int nrCopie, String autore, String sinossi) {
 		super(titolo, genere, nrCopie);

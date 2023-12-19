@@ -1,17 +1,20 @@
 package org.generation.italy;
 
+import org.generation.italy.model.Film;
 import org.generation.italy.model.Libro;
+import org.generation.italy.model.LibroCartaceo;
 import org.generation.italy.model.Prestito;
+import org.generation.italy.model.eBook;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
 		Libro l=
-			new Libro(
+			new LibroCartaceo(
 				"Il signore degli anelli - la compagnia dell'anello",
 				"Fantasy",
-				2,"Tolkien","Secoli dopo la sconfitta di Sauron, una compagnia di coraggiosi ...");
+				2,"Tolkien","Secoli dopo la sconfitta di Sauron, una compagnia di coraggiosi ...",700);
 		
 		if (l.effettuaPrestito("Pino")>0)
 			System.out.println("Prestito effettuato");
@@ -35,10 +38,10 @@ public class Main {
 		l.restituisciPrestito(2);
 		
 		Libro l1=
-			new Libro(
+			new eBook(
 				"L'ombra dello scorpione",
 				"Fantasy",
-				5,"S.King","Una misteriosa epidemia stermina gran parte della popolazione ...");
+				5,"S.King","Una misteriosa epidemia stermina gran parte della popolazione ...","mobi",300);
 		
 		System.out.println(l.dettagli());
 		
@@ -47,6 +50,14 @@ public class Main {
 			System.out.println("Prestito: "+p.getId()+" - utente:"+p.getUtente()+
 					" datainizio:"+p.getDataInizio()+" datafine:"+p.getDataFine());
 		System.out.println(l1.dettagli());
+		
+		
+		Film f=new Film("Pulp fiction", "Pulp", 2, "Tarantino", "B. Willis, J.Travolta, U. Thurman", 154);
+		System.out.println(f.dettagli());
+		
+		f.play();
+		
+		f.stop();
 	}
 
 }
