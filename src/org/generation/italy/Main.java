@@ -62,56 +62,56 @@ public class Main {
 					System.out.print("Nr copie: ");
 					nrCopie=Integer.parseInt(sc.nextLine());
 					switch (scelta) {
-					case "L":
-					case "A":
-					case "E":
-						//chiedo autore, sinossi (comuni a tutti i libri)
-						String autore, sinossi;						
-						System.out.print("Autore: ");
-						autore=sc.nextLine();
-						System.out.print("Sinossi: ");
-						sinossi=sc.nextLine();
-						switch (scelta) {
-							case "L": {		//libro cartaceo
-								int nrPagine;
-								System.out.print("Nr pagine: ");
-								nrPagine=Integer.parseInt(sc.nextLine());
-								m.aggiungiElemento(new LibroCartaceo(titolo, genere, nrCopie, autore, sinossi, nrPagine));
-								break;
-							}
-							case "A": {		//audiolibro
-								String voceNarrante;
-								System.out.print("Voce narrante: ");
-								voceNarrante=sc.nextLine();
-								m.aggiungiElemento(new AudioLibro(titolo, genere, nrCopie, autore, sinossi, voceNarrante));						
-								break;
-							}
-							case "E": {		//ebook
-								String formato;
-								int dimensioneKB;
-								System.out.print("Formato: ");
-								formato=sc.nextLine();
-								System.out.print("Dimensione (KB): ");
-								dimensioneKB=Integer.parseInt(sc.nextLine());
-								m.aggiungiElemento(new eBook(titolo, genere, nrCopie, autore, sinossi, formato, dimensioneKB));						
-								break;						
-								
+						case "L":
+						case "A":
+						case "E":
+							//chiedo autore, sinossi (comuni a tutti i libri)
+							String autore, sinossi;						
+							System.out.print("Autore: ");
+							autore=sc.nextLine();
+							System.out.print("Sinossi: ");
+							sinossi=sc.nextLine();
+							switch (scelta) {
+								case "L": {		//libro cartaceo
+									int nrPagine;
+									System.out.print("Nr pagine: ");
+									nrPagine=Integer.parseInt(sc.nextLine());
+									m.aggiungiElemento(new LibroCartaceo(titolo, genere, nrCopie, autore, sinossi, nrPagine));
+									break;
+								}
+								case "A": {		//audiolibro
+									String voceNarrante;
+									System.out.print("Voce narrante: ");
+									voceNarrante=sc.nextLine();
+									m.aggiungiElemento(new AudioLibro(titolo, genere, nrCopie, autore, sinossi, voceNarrante));						
+									break;
+								}
+								case "E": {		//ebook
+									String formato;
+									int dimensioneKB;
+									System.out.print("Formato: ");
+									formato=sc.nextLine();
+									System.out.print("Dimensione (KB): ");
+									dimensioneKB=Integer.parseInt(sc.nextLine());
+									m.aggiungiElemento(new eBook(titolo, genere, nrCopie, autore, sinossi, formato, dimensioneKB));						
+									break;						
+									
+								}						
 							}						
-						}						
-						
-						break;
-					case "F":
-						//chiedo attori, durata, regista
-						String attori, regista;
-						int durata;
-						System.out.print("Attori: ");
-						attori=sc.nextLine();
-						System.out.print("Regista: ");
-						regista=sc.nextLine();
-						System.out.print("durata: ");
-						durata=Integer.parseInt(sc.nextLine());
-						m.aggiungiElemento(new Film(titolo, genere, nrCopie, regista, attori, durata));
-						break;
+							
+							break;
+						case "F":
+							//chiedo attori, durata, regista
+							String attori, regista;
+							int durata;
+							System.out.print("Attori: ");
+							attori=sc.nextLine();
+							System.out.print("Regista: ");
+							regista=sc.nextLine();
+							System.out.print("durata: ");
+							durata=Integer.parseInt(sc.nextLine());
+							m.aggiungiElemento(new Film(titolo, genere, nrCopie, regista, attori, durata));
+							break;
 					}
 				} else
 					System.out.println("Scelta non valida!");
@@ -122,6 +122,15 @@ public class Main {
 					System.out.println(e.dettagli());
 				break;
 			}
+			case "3": {
+				String titolo;
+				System.out.print("Titolo: ");
+				titolo=sc.nextLine();
+				for(ElementoMultimediale e:m.getElencoElementi(titolo))
+					System.out.println(e.dettagli());
+				break;
+			}
+				
 			case "9":
 				System.out.println("Arrivederci!");
 				break;
