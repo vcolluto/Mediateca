@@ -3,6 +3,7 @@ package org.generation.italy;
 import org.generation.italy.model.Film;
 import org.generation.italy.model.Libro;
 import org.generation.italy.model.LibroCartaceo;
+import org.generation.italy.model.Mediateca;
 import org.generation.italy.model.Prestito;
 import org.generation.italy.model.eBook;
 
@@ -58,6 +59,11 @@ public class Main {
 		f.play();
 		
 		f.stop();
+		
+		Mediateca m=new Mediateca();
+		
+		m.elencoElementi=null;
+		
 	}
 
 }
