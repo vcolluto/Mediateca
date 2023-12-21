@@ -7,6 +7,7 @@ import java.util.Scanner;
 import org.generation.italy.model.AudioLibro;
 import org.generation.italy.model.ElementoMultimediale;
 import org.generation.italy.model.Film;
+import org.generation.italy.model.IMedia;
 import org.generation.italy.model.Libro;
 import org.generation.italy.model.LibroCartaceo;
 import org.generation.italy.model.Mediateca;
@@ -52,6 +53,8 @@ public class Main {
 			System.out.println("4 - effettua prestito");
 			System.out.println("5 - restituisci prestito");
 			System.out.println("6 - elenco prestiti");
+			System.out.println("7 - Riproduci elemento");
+			System.out.println("8 - Interrompi riproduzione elemento");
 			System.out.println();
 			System.out.println("9 - esci");
 			System.out.print("\nInserisci la tua scelta: ");
@@ -190,6 +193,31 @@ public class Main {
 					
 				break;
 			}
+			case "7": {
+				int id;
+				System.out.print("Inserisci l'id dell'elemento da riprodurre: ");
+				id=Integer.parseInt(sc.nextLine());
+				ElementoMultimediale e=m.cercaElemento(id);
+				System.out.println(e.dettagli());
+				if (e instanceof IMedia)	//è riproducibile?
+					((IMedia) e).play();
+				else
+					System.out.println("Impossibile riprodurre elemento!");
+				break;
+			}
+			case "8": {
+				int id;
+				System.out.print("Inserisci l'id dell'elemento del quale fermare la riproduzione: ");
+				id=Integer.parseInt(sc.nextLine());
+				ElementoMultimediale e=m.cercaElemento(id);
+				System.out.println(e.dettagli());
+				if (e instanceof IMedia)	//è riproducibile?
+					((IMedia) e).stop();
+				else
+					System.out.println("Impossibile fermare la riproduzione dell'elemento!");
+				break;
+			}
+				
 			case "9":
 				System.out.println("Arrivederci!");
 				break;
