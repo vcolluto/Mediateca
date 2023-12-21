@@ -1,7 +1,7 @@
 package org.generation.italy;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import org.generation.italy.model.AudioLibro;
@@ -14,12 +14,13 @@ import org.generation.italy.model.Prestito;
 import org.generation.italy.model.eBook;
 
 public class Main {
+	static DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public static void main(String[] args) {
 		Mediateca m=new Mediateca();
 		Scanner sc=new Scanner(System.in);
 		String scelta;
-		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
 				
 		Libro l=
 			new LibroCartaceo(
@@ -39,7 +40,12 @@ public class Main {
 		m.aggiungiElemento(f);
 		
 		do {
-			System.out.println("\n\n\n\n\n\n\n\n\n***** MEDIATECA JAITA101 *****\n");
+			//JConsole.clear();
+			
+			//JConsole.setForegroundColor(JConsoleColor.GREEN);
+			//JConsole.setBold();
+			System.out.println("\n\n\n\n\n\n\n\n\n\n**** MEDIATECA JAITA101 *****\n");
+			//JConsole.resetText();
 			System.out.println("1 - aggiungi elemento");
 			System.out.println("2 - elenco elementi");
 			System.out.println("3 - cerca per titolo");
@@ -158,15 +164,8 @@ public class Main {
 				id=Integer.parseInt(sc.nextLine());
 				ElementoMultimediale e=m.cercaElemento(id);
 				System.out.println(e.dettagli());
-				System.out.println("Prestiti:");
-				for (Prestito p:e.getElencoPrestiti()) {
-					System.out.println("\tId: "+p.getId());
-					System.out.println("\tData inizio: "+p.getDataInizio().format(dtf));
-					System.out.print("\tData fine: ");
-					if (p.getDataFine()!=null)
-						System.out.println(p.getDataFine().format(dtf));
-					System.out.println("\tUtente: "+p.getUtente());
-				}
+				for(Prestito p:e.getElencoPrestiti())
+					dettaglioPrestito(p);
 				System.out.print("Inserisci l'id del prestito da restituire: ");
 				int idPrestito=Integer.parseInt(sc.nextLine());
 				for (Prestito p:e.getElencoPrestiti())
@@ -174,6 +173,21 @@ public class Main {
 						e.restituisciPrestito(idPrestito);
 						System.out.println("Prestito correttamente restituito");
 					}						
+				break;
+			}
+			case "6": {		//elenco prestiti	
+				HashMap<Integer, Prestito> elencoPrestiti=new HashMap<Integer, Prestito>();
+				for(ElementoMultimediale e:m.getElencoElementi()) {
+					System.out.println(e.dettagli());
+					System.out.println("\t\nElenco prestiti:");
+					for(Prestito p:e.getElencoPrestiti()) 
+					{
+						elencoPrestiti.put(p.getId(), p);
+						dettaglioPrestito(p);					
+						System.out.println();
+					}
+				}
+					
 				break;
 			}
 			case "9":
@@ -187,6 +201,15 @@ public class Main {
 		} while (!scelta.equals("9"));
 		
 		sc.close();
+	}
+
+	private static void dettaglioPrestito(Prestito p) {	
+		System.out.println("\tId: "+p.getId());
+		System.out.println("\tData inizio: "+p.getDataInizio().format(dtf));
+		System.out.print("\tData fine: ");
+		if (p.getDataFine()!=null)
+			System.out.println(p.getDataFine().format(dtf));
+		System.out.println("\tUtente: "+p.getUtente());		
 	}
 
 }
