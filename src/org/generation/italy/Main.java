@@ -135,7 +135,7 @@ public class Main {
 				break;
 			}
 				
-			case "4": {		//effettua prestito
+			case "4": {		//effettua il prestito
 				int id;
 				System.out.print("Inserisci l'id dell'elemento da prestare: ");
 				id=Integer.parseInt(sc.nextLine());
