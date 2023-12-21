@@ -1,5 +1,7 @@
 package org.generation.italy;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.generation.italy.model.AudioLibro;
@@ -17,6 +19,7 @@ public class Main {
 		Mediateca m=new Mediateca();
 		Scanner sc=new Scanner(System.in);
 		String scelta;
+		DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 				
 		Libro l=
 			new LibroCartaceo(
@@ -42,13 +45,14 @@ public class Main {
 			System.out.println("3 - cerca per titolo");
 			System.out.println("4 - effettua prestito");
 			System.out.println("5 - restituisci prestito");
+			System.out.println("6 - elenco prestiti");
 			System.out.println();
 			System.out.println("9 - esci");
 			System.out.print("\nInserisci la tua scelta: ");
 			scelta=sc.nextLine();
 			
 			switch (scelta) {
-			case "1": {
+			case "1": {		//inserimento
 				System.out.print("Che tipo di elemento vuoi aggiungere (L: libro/F: film/A: audiolibro/E: ebook): ");
 				scelta=sc.nextLine();
 				if (scelta.equalsIgnoreCase("L") || scelta.equalsIgnoreCase("F") ||
@@ -117,12 +121,12 @@ public class Main {
 					System.out.println("Scelta non valida!");
 				break;	
 			}
-			case "2": {
+			case "2": {		//elenco di tutti gli elementi
 				for (ElementoMultimediale e: m.getElencoElementi())
 					System.out.println(e.dettagli());
 				break;
 			}
-			case "3": {
+			case "3": {		//elenco filtrato per parola chiave
 				String titolo;
 				System.out.print("Titolo: ");
 				titolo=sc.nextLine();
@@ -131,6 +135,47 @@ public class Main {
 				break;
 			}
 				
+			case "4": {		//effettua prestito
+				int id;
+				System.out.print("Inserisci l'id dell'elemento da prestare: ");
+				id=Integer.parseInt(sc.nextLine());
+				ElementoMultimediale e=m.cercaElemento(id);
+				System.out.println(e.dettagli());
+				if (e.getNrCopie()>0) {
+					String utente;
+					System.out.print("Inserisci il nome dell'utente: ");
+					utente=sc.nextLine();
+					e.effettuaPrestito(utente);
+					System.out.println("Prestito correttamente effettuato");
+				} else 
+					System.out.println("Nessuna copia disponibile!");
+				break;
+			}
+			
+			case "5": {		//restituisci prestito
+				int id;
+				System.out.print("Inserisci l'id dell'elemento da restituire: ");
+				id=Integer.parseInt(sc.nextLine());
+				ElementoMultimediale e=m.cercaElemento(id);
+				System.out.println(e.dettagli());
+				System.out.println("Prestiti:");
+				for (Prestito p:e.getElencoPrestiti()) {
+					System.out.println("\tId: "+p.getId());
+					System.out.println("\tData inizio: "+p.getDataInizio().format(dtf));
+					System.out.print("\tData fine: ");
+					if (p.getDataFine()!=null)
+						System.out.println(p.getDataFine().format(dtf));
+					System.out.println("\tUtente: "+p.getUtente());
+				}
+				System.out.print("Inserisci l'id del prestito da restituire: ");
+				int idPrestito=Integer.parseInt(sc.nextLine());
+				for (Prestito p:e.getElencoPrestiti())
+					if (p.getId()==idPrestito) {
+						e.restituisciPrestito(idPrestito);
+						System.out.println("Prestito correttamente restituito");
+					}						
+				break;
+			}
 			case "9":
 				System.out.println("Arrivederci!");
 				break;
