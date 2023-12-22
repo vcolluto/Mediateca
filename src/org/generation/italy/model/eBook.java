@@ -5,7 +5,7 @@ public class eBook extends Libro {
 	private int dimensioneKB;
 	
 	public eBook(String titolo, String genere, int nrCopie, String autore, String sinossi, String formato,
-			int dimensioneKB) {
+			int dimensioneKB) throws Exception {
 		super(titolo, genere, nrCopie, autore, sinossi);
 		this.formato = formato;
 		this.dimensioneKB = dimensioneKB;

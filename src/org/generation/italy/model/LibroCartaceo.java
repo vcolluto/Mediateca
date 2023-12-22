@@ -4,7 +4,7 @@ public class LibroCartaceo extends Libro {
 
 	private int pagine;
 	
-	public LibroCartaceo(String titolo, String genere, int nrCopie, String autore, String sinossi, int pagine) {
+	public LibroCartaceo(String titolo, String genere, int nrCopie, String autore, String sinossi, int pagine) throws Exception {
 		super(titolo, genere, nrCopie, autore, sinossi);
 		this.pagine=pagine;
 	}

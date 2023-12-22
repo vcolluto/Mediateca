@@ -6,7 +6,7 @@ public class Film extends ElementoMultimediale implements IMedia {
 	private int durata;
 
 	
-	public Film(String titolo, String genere, int nrCopie, String regista, String attori, int durata) {
+	public Film(String titolo, String genere, int nrCopie, String regista, String attori, int durata) throws Exception {
 		super(titolo, genere, nrCopie);
 		this.regista = regista;
 		this.attori = attori;

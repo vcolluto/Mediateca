@@ -5,7 +5,7 @@ public class AudioLibro extends Libro implements IMedia {
 	private String voceNarrante;
 	
 
-	public AudioLibro(String titolo, String genere, int nrCopie, String autore, String sinossi, String voceNarrante) {
+	public AudioLibro(String titolo, String genere, int nrCopie, String autore, String sinossi, String voceNarrante) throws Exception {
 		super(titolo, genere, nrCopie, autore, sinossi);
 		this.voceNarrante = voceNarrante;
 	}
